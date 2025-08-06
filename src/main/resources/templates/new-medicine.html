@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>薬の新規登録</title>
+</head>
+<body>
+    <h1>薬の新規登録</h1>
+
+    <form action="#" th:action="@{/medicines}" th:object="${medicine}" method="post">
+        <div>
+            <label>薬の名前:</label>
+            <input type="text" th:field="*{name}" required />
+        </div>
+        <div>
+            <button type="submit">登録</button>
+        </div>
+    </form>
+    
+    <hr>
+    <a href="/medicines">一覧に戻る</a>
+
+</body>
+</html>

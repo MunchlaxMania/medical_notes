@@ -1,0 +1,10 @@
+### 薬を一件登録する
+POST http://localhost:8080/api/medicines
+Content-Type: application/json
+
+{
+  "name": "鎮痛剤A"
+}
+
+### 登録されている薬を全件取得する
+GET http://localhost:8080/api/medicines

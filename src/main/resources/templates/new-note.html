@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>新規記録登録</title>
+</head>
+<body>
+    <h1>新規記録登録</h1>
+
+    <form action="#" th:action="@{/medicines/{id}/notes(id=${medicineId})}" th:object="${note}" method="post">
+        <div>
+            <label>服用前の痛み (1-5):</label>
+            <input type="number" th:field="*{painBefore}" min="1" max="5" required />
+        </div>
+        <div>
+            <label>30分後の痛み (1-5):</label>
+            <input type="number" th:field="*{painAfter30}" min="1" max="5" />
+        </div>
+        <div>
+            <label>60分後の痛み (1-5):</label>
+            <input type="number" th:field="*{painAfter60}" min="1" max="5" />
+        </div>
+        <div>
+            <label>120分後の痛み (1-5):</label>
+            <input type="number" th:field="*{painAfter120}" min="1" max="5" />
+        </div>
+        <hr>
+        <div>
+            <button type="submit">記録する</button>
+        </div>
+    </form>
+    
+    <hr>
+    <a th:href="@{/medicines/{id}/notes(id=${medicineId})}">記録一覧に戻る</a>
+</body>
+</html>

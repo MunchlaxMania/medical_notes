@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>薬一覧</title>
+</head>
+<body>
+    <h1>薬一覧</h1>
+
+    <div>
+        <a href="/medicines/new">新しい薬を登録する</a>
+    </div>
+
+    <hr>
+
+    <ul>
+        <li th:each="medicine : ${medicines}">
+            <span th:text="${medicine.id}">1</span>:
+            <span th:text="${medicine.name}">薬の名前</span>
+            <a th:href="@{/medicines/{id}/notes(id=${medicine.id})}">記録を見る</a>
+        </li>
+    </ul>
+
+</body>
+</html>
