@@ -57,17 +57,26 @@ public class PageController {
         return "new-note"; // new-note.html を表示
     }
 
+    //編集フォームを表示するメソッド
+    @GetMapping("/medicines/edit/{id}")
+    public String showEditMedicineForm(@PathVariable Integer id, Model model) {
+        // IDを探索し、フォームに渡す
+        Medicine medicine = medicineRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid medicine Id:" + id));
+        model.addAttribute("medicine", medicine);
+        return "edit-medicine";
+    }
+
     //フォームから送られたデータをDBに保存するメソッド
     @PostMapping("/medicines/{medicineId}/notes")
     public String createNote(@PathVariable Integer medicineId, Note note) {
-        // 1. どの薬に対する記録かを特定
+        // どの薬に対する記録かを特定
         Medicine medicine = medicineRepository.findById(medicineId).orElse(null);
         if (medicine == null) {
             //エラー処理
             return "redirect:/medicines";
         }
 
-        // 2. Noteオブジェクトに必要な情報をセットし保存
+        // Noteオブジェクトに必要な情報をセットし保存
         note.setMedicine(medicine);
         note.setCreatedAt(LocalDateTime.now());
         noteRepository.save(note);
@@ -75,9 +84,6 @@ public class PageController {
         // 同じ薬の記録一覧画面にリダイレクト
         return "redirect:/medicines/" + medicineId + "/notes";
     }
-
-    // PageController.java にこのメソッドを追記してください
-
 
      // 薬の新規登録フォームから送られたデータを受け取り、DBに保存するためのメソッド
     @PostMapping("/medicines")
@@ -87,5 +93,16 @@ public class PageController {
         // 保存後、薬一覧画面にリダイレクト（再表示）する
         return "redirect:/medicines";
     }
+
+    // 編集フォームから送られたデータで更新処理を行うメソッド
+    @PostMapping("/medicines/update/{id}")
+    public String updateMedicine(@PathVariable Integer id, Medicine medicine) {
+        medicineRepository.save(medicine);
+
+        return "redirect:/medicines";
+    }
+
+
+    
 
 }
