@@ -65,6 +65,15 @@ public class PageController {
         model.addAttribute("medicine", medicine);
         return "edit-medicine";
     }
+    // 編集フォームから送られたデータで更新処理を行うメソッド
+    @PostMapping("/medicines/update/{id}")
+    public String updateMedicine(@PathVariable Integer id, Medicine medicine) {
+        medicineRepository.save(medicine);
+
+        // 更新後、薬一覧画面にリダイレクト
+        return "redirect:/medicines";
+    }
+
 
     //フォームから送られたデータをDBに保存するメソッド
     @PostMapping("/medicines/{medicineId}/notes")
@@ -94,15 +103,24 @@ public class PageController {
         return "redirect:/medicines";
     }
 
-    // 編集フォームから送られたデータで更新処理を行うメソッド
-    @PostMapping("/medicines/update/{id}")
-    public String updateMedicine(@PathVariable Integer id, Medicine medicine) {
-        medicineRepository.save(medicine);
+    // //以下は痛みの内容を変更するメソッド
+    // //ノートの編集フォームを表示するメソッド
+    @GetMapping("/notes/edit/{noteId}")
+    public String showEditNoteForm(@PathVariable Integer noteId, Model model) {
+        Note note = noteRepository.findById(noteId)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + noteId ));
+        
+        model.addAttribute("note", note);
+        model.addAttribute("medicineId", note.getMedicine().getId());
 
-        return "redirect:/medicines";
+        return "edit-note";
     }
-
-
-    
+    // // ノートの編集フォームから送られたデータで更新処理を行うメソッド
+    @PostMapping("/notes/update/{id}")
+    public String updateNote(@PathVariable Integer id, Note note) {
+        noteRepository.save(note);
+        
+        return "redirect:/medicines/" + note.getMedicine().getId() + "/notes";
+    }
 
 }
