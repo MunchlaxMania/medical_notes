@@ -18,6 +18,7 @@
             <span th:text="${medicine.id}">1</span>:
             <span th:text="${medicine.name}">薬の名前</span>
             <a th:href="@{/medicines/{id}/notes(id=${medicine.id})}">記録を見る</a>
+            <a th:href="@{/medicines/edit/{id}(id=${medicine.id})}">編集</a>
         </li>
     </ul>
 
