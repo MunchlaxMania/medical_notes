@@ -66,8 +66,8 @@ public class PageController {
         return "edit-medicine";
     }
     // 編集フォームから送られたデータで更新処理を行うメソッド
-    @PostMapping("/medicines/update/{id}")
-    public String updateMedicine(@PathVariable Integer id, Medicine medicine) {
+    @PostMapping("/medicines/update")
+    public String updateMedicine(Medicine medicine) {
         medicineRepository.save(medicine);
 
         // 更新後、薬一覧画面にリダイレクト
