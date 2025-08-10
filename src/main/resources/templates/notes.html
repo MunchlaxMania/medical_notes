@@ -5,7 +5,7 @@
     <title>記録一覧</title>
 </head>
 <body>
-    <h1 th:text="${medicine.name} + ' の記録一覧'">薬の名前 の記録一覧</h1>
+    <h1 th:text="${medicine.name} + 'の記録一覧'">薬の名前 の記録一覧</h1>
     <div>
         <a th:href="@{/medicines/{id}/notes/new(id=${medicine.id})}">新しい記録を登録する</a>
     </div>
@@ -17,7 +17,10 @@
             記録日時: <span th:text="${note.createdAt}"></span><br>
             服用前の痛み: <span th:text="${note.painBefore}"></span><br>
             30分後の痛み: <span th:text="${note.painAfter30}"></span><br>
-            </li>
+            60分後の痛み: <span th:text="${note.painAfter60}"></span><br>
+            120分後の痛み: <span th:text="${note.painAfter120}"></span><br>
+            <a th:href="@{/notes/edit/{id}(id=${note.id})}">この記録を編集する</a>
+        </li>
     </ul>
 
     <a href="/medicines">薬一覧に戻る</a>
