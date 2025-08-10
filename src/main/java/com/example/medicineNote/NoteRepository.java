@@ -1,4 +1,4 @@
-// 服薬記録の出たを操作するためのリポジトリ
+// 服薬記録のデータを操作するためのリポジトリ
 
 package com.example.medicineNote;
 
@@ -9,3 +9,4 @@ public interface NoteRepository extends JpaRepository<Note, Integer> {
     //　渡されたmedicineIdに一致するNoteを検索するメソッド
     List<Note> findByMedicineId(Integer medicineId);
 }
+
